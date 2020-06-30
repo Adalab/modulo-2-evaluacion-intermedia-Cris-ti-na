@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluación intermedia</title>
+    <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/main.css" />
 </head>
-<body>
+<body class="page">
     <h1>Adivina el número</h1>
+    <form class="form">
+        <label>Introduce aquí tu número:</label>
+        <input type="number" min="1" max="100" step="1"> 
+        <button type="button" class="button">Prueba</button>
+    </form>
+    <p class="clue"></p>
+    <p class="counter"></p>
     <script src="./js/main.js"></script>
 </body>
 </html>

@@ -1,3 +1,22 @@
-body {
+.page {
+    margin: 0px;
     background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: solid red 1px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: turquoise;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    height: 25px;
+    width: 80px;
 }
