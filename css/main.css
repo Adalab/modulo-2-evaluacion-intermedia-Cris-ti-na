@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 
-.input {
+.form-input {
     background-color: lightgrey;
     border: none;
     border-radius: 3px;

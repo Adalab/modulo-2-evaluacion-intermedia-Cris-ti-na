@@ -1,6 +1,9 @@
 'use strict';
 
-//Obtain random number
+//Contador a 0
+let count = 0;
+
+//Obtener número aleatorio
 function getRandomNumber (max) {
     return Math.ceil(Math.random() * max);
 }
@@ -9,48 +12,53 @@ let rndm = getRandomNumber (100);
 
 console.log('Mi número aleatorio es ' + rndm);
 
-//Constants
-const input = document.querySelector('.input');
-const button = document.querySelector('.button');
-const clue = document.querySelector('.clue');
-const counter = document.querySelector('.counter');
+//Señalamos el formulario
+const form = document.querySelector('#form');
 
+//Indicamos los distintos tipos de pistas
+const clue = document.querySelector('#clue');
+const clueList = {
+    valid_number: 'Has ganado campeona!!!',
+    invalid_number: 'El número debe estar entre 1 y 100.',
+    too_high: 'Demasiado alto.',
+    too_low: 'Demasiado bajo.',
+};
 
+form.addEventListener ('submit', handleSubmit);
 
-//Function checkout
-function checkout () {
-    if (input.value.lenght !== 0) { validation(input.value);
-        if (validation(input.value) === true) {
-            if (input === rndm) {
-                printMessage(`Has ganado campeona!!!`);
-            }
-            else if (input < rndm) {
-                printMessage(`Demasiado bajo`);
-            }
-            else if (input > rndm) {
-                printMessage(`Demasiado alto`)
-            }
+function handleSubmit (event) {
+    event.preventDefault();
+    //Recogemos el dato del input y revisamos si es válido
+    const input = document.querySelector('#form-input');
+    const inputValue = input.value;
+    //console.log(validateInput(inputValue));
+    if (validateInput(input.value)) {
+        updateCounter();
+        if (inputValue == rndm) {
+            updateClue (clueList.valid_number);
         }
-        else {
-            printMessage(`El número debe estar entre 1 y 100`)
+        if (inputValue < rndm) {
+           updateClue (clueList.too_low);
         }
-    }
-}
-
-//Function validation
-function validation (number) {
-    if (0 <= number <= 100 ) {
-        return true;
+        if (inputValue > rndm) {
+           updateClue (clueList.too_high);
+        }
     }
     else {
-        return false;
+        updateClue (clueList.invalid_number);
     }
-}
+};
 
-//Function printMessage
-function printMessage (obj) {
-    clue.innerHTML = obj.clue || `Escribe un número y dale a Prueba`;
-    counter.innerHTML = obj.counter || `Número de intentos: 0`;
-}
+function validateInput (value) {
+    return (value >=1) && (value <= 100)
+};
 
-input.addEventListener('keyup');
+function updateClue (clueText) {
+    clue.innerHTML = clueText;
+};
+
+function updateCounter () {
+    count = count + 1;
+    const counter = document.querySelector('#counter');
+    counter.innerHTML = `Número de intentos: ${count}`;
+};
